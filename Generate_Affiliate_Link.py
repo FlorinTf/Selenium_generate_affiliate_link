@@ -7,8 +7,8 @@ import webbrowser
 from selenium.webdriver.chrome.options import Options
 import os
 
-user = os.environ.get("UserAdmital")
-password = os.environ.get("passAdmital")
+user = os.environ.get("User")
+password = os.environ.get("pass")
 nume_client=[]
 links=[]
 
@@ -60,59 +60,5 @@ driver.set_window_size(1920,1080)
 driver.get(website)
 
 link_final=[]
-x = []
-
-def log_in():
-
-    global link_final
-
-    print(driver.find_element(By.NAME,"username").get_attribute("innerHTML"))
-    input_user = driver.find_element(By.NAME,"username")
-    driver.implicitly_wait(10)
-    input_user.click()
-    input_user.send_keys(user)
-
-    parola = driver.find_element(By.NAME,"password")
-    parola.click()
-    parola.send_keys(password)
-    driver.implicitly_wait(10)
-    accept = driver.find_element(By.CLASS_NAME, "close")
-    accept.click()
-    log_in = driver.find_element(By.ID,"kc-login")
-    log_in.click()
-
-    program = driver.find_element(By.XPATH,'//*[@data-test-id="advcampaigns"]')
-    program.click()
-    driver.implicitly_wait(10)
-
-    aliexpress = driver.find_element(By.LINK_TEXT,'Aliexpress WW')
-    aliexpress.click()
-
-    driver.implicitly_wait(6)
-    benner = driver.find_element(By.LINK_TEXT, "Banners and Links")
-    benner.click()
-    driver.implicitly_wait(6)
-    deeplink = driver.find_element(By.LINK_TEXT, "Deeplink")
-    deeplink.click()
-    driver.implicitly_wait(6)
-    sub_id = driver.find_element(By.XPATH,'//*[@data-test-id="deeplink_subid0_input"]')
-    sub_id.click()
-    sub_id.send_keys(nume_client)
-    driver.implicitly_wait(6)
-    paste_link = driver.find_element(By.XPATH,'//*[@data-test-id="page_for_traffic"]')
-    paste_link.click()
-    paste_link.send_keys(links)
-    time.sleep(5)
-    copy_link = driver.find_element(By.XPATH,'//*[@data-test-id="generated_link_offer_page"]')
-    copy_link.click()
-
-    x=copy_link.get_attribute("value")
-    link_final.append(x)
-
-    webbrowser.open_new(x)
-    # driver.implicitly_wait(2)
-    driver.quit()
-
-log_in()
 
 
