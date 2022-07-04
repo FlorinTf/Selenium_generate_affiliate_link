@@ -62,3 +62,61 @@ driver.get(website)
 link_final=[]
 
 
+def log_in():
+
+    global link_final
+
+    print(driver.find_element(By.NAME,"username").get_attribute("innerHTML"))
+    input_user = driver.find_element(By.NAME,"username")
+
+    time.sleep(2)
+    input_user.click()
+    input_user.send_keys(user)
+
+    parola = driver.find_element(By.NAME,"password")
+    parola.click()
+    parola.send_keys(password)
+
+    time.sleep(3)
+    accept = driver.find_element(By.CLASS_NAME, "close")
+    accept.click()
+    log_in = driver.find_element(By.ID,"kc-login")
+    log_in.click()
+
+    program = driver.find_element(By.XPATH,'//*[@data-test-id="advcampaigns"]')
+    program.click()
+
+    time.sleep(4)
+    aliexpress = driver.find_element(By.LINK_TEXT,'Aliexpress WW')
+    aliexpress.click()
+
+
+    time.sleep(4)
+    benner = driver.find_element(By.LINK_TEXT, "Banners and Links")
+    benner.click()
+
+    time.sleep(4)
+    deeplink = driver.find_element(By.LINK_TEXT, "Deeplink")
+    deeplink.click()
+
+    time.sleep(3)
+    sub_id = driver.find_element(By.XPATH,'//*[@data-test-id="deeplink_subid0_input"]')
+    sub_id.click()
+    sub_id.send_keys(nume_client)
+
+    time.sleep(4)
+    paste_link = driver.find_element(By.XPATH,'//*[@data-test-id="page_for_traffic"]')
+    paste_link.click()
+    paste_link.send_keys(links)
+    time.sleep(3)
+    copy_link = driver.find_element(By.XPATH,'//*[@data-test-id="generated_link_offer_page"]')
+    copy_link.click()
+
+    new_value=copy_link.get_attribute("value")
+    link_final.append(new_value)
+
+    webbrowser.open_new(new_value)
+    # driver.implicitly_wait(2)
+    driver.quit()
+
+log_in()
